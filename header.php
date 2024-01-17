@@ -13,7 +13,7 @@
   <?php wp_head(); ?>
 </head>
 
-<body <? ?>>
+<body <?php body_class(); ?>>
   <div class="container">
     <header id="header">
       <div class="header-inner">
@@ -28,26 +28,12 @@
         </button>
         <div class="header-nav">
           <nav class="global-nav">
-            <ul class="menu">
-              <li class="menu-item">
-                <a class="nav-link active" href="#">ホーム</a>
-              </li>
-              <li class="menu-item">
-                <a class="nav-link" href="#">企業情報</a>
-              </li>
-              <li class="menu-item">
-                <a class="nav-link" href="#">店舗情報</a>
-              </li>
-              <li class="menu-item">
-                <a class="nav-link" href="#">地域貢献活動</a>
-              </li>
-              <li class="menu-item">
-                <a class="nav-link" href="#">ニュースリリース</a>
-              </li>
-              <li class="menu-item">
-                <a class="nav-link" href="#">お問い合わせ</a>
-              </li>
-            </ul>
+            <?php
+            wp_nav_menu(array(
+              'theme_location' => 'place_global',
+              'container' => false,
+            ));
+            ?>
           </nav>
           <form class="search-form" role="search" method="get" action="">
             <div class="search-box">
@@ -62,14 +48,29 @@
         </div>
       </div>
     </header>
-    <section class="section-contents" id="keyvisual">
-      <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bg-section-keyvisual.jpg" alt="MAIN IMAGE" />
-      <div class="wrapper">
-        <h1 class="site-title">Connecting the future.</h1>
-        <p class="site-caption">
-          私たちパシフィックモール開発は<br />
-          世界各地のショッピングモール開発を通じて<br />
-          人と人、人と地域を結ぶお手伝いをしています。
-        </p>
-      </div>
-    </section>
+    <?php if (is_front_page()) : ?>
+      <section class="section-contents" id="keyvisual">
+        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bg-section-keyvisual.jpg" alt="MAIN IMAGE" />
+        <div class="wrapper">
+          <h1 class="site-title">Connecting the future.</h1>
+          <p class="site-caption">
+            私たちパシフィックモール開発は<br />
+            世界各地のショッピングモール開発を通じて<br />
+            人と人、人と地域を結ぶお手伝いをしています。
+          </p>
+        </div>
+      </section>
+    <?php else : ?>
+      <div class="wrap">
+        <div id="primary" class="content-area">
+          <main>
+            <div class="page-contents">
+              <div class="page-head">
+                <?php echo get_main_image(); ?>
+                <div class="wrapper">
+                  <span class="page-title-en"></span>
+                  <h2 class="page-title"><?php echo get_main_title() ?></h2>
+                </div>
+              </div>
+              <div class="page-container">
+              <?php endif; ?>

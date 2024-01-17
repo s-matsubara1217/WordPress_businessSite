@@ -1,3 +1,11 @@
+<?php if (!is_front_page()) : ?>
+  </div>
+  </div>
+  </main>
+  </div>
+  </div>
+<?php endif; ?>
+
 <footer class="footer" id="footer">
   <div class="footerContents">
     <div class="footerContents-contact">
@@ -14,32 +22,12 @@
     </div>
     <div class="footerContents-sitemap">
       <nav class="footer-nav">
-        <ul class="menu">
-          <li class="menu-item">
-            <a class="nav-link" href="#">企業情報</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">会社概要</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">事業紹介</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">沿革</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">店舗情報</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">地域貢献活動</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">ニュースリリース</a>
-          </li>
-          <li class="menu-item">
-            <a class="nav-link" href="#">お問い合わせ</a>
-          </li>
-        </ul>
+        <?php
+        wp_nav_menu(array(
+          'theme_location' => 'place_footer',
+          'container' => false,
+        ));
+        ?>
       </nav>
     </div>
   </div>

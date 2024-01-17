@@ -1,66 +1,38 @@
 <?php get_header(); ?>
 <section class="section-contents" id="shop">
   <div class="wrapper">
+    <?php
+    $post = get_page_by_path('shop');
+    setup_postdata($post);
+    $shop_title = get_the_title();
+    ?>
     <span class="section-title-en">Shop Information</span>
-    <h2 class="section-title">店舗情報</h2>
-    <p class="section-lead">パシフィックモール開発が取り組んだ ショッピングモールをご紹介します</p>
+    <h2 class="section-title"><?php the_title(); ?></h2>
+    <p class="section-lead"><?php echo get_the_excerpt(); ?></p>
+    <?php wp_rest_postdata(); ?>
     <ul class="shops">
-      <li class="shops-item">
-        <a class="shop-link" href="#">
-          <div class="shop-image">
-            <img src="#" alt="" />
-          </div>
-          <div class="shop-body">
-            <p class="name">大手町モール</p>
-            <p class="location"></p>
-            <div class="buttonBox">
-              <button type="button" class="seeDetail">MORE</button>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="shops-item">
-        <a class="shop-link" href="#">
-          <div class="shop-image">
-            <img src="#" alt="" />
-          </div>
-          <div class="shop-body">
-            <p class="name">タムリンモール</p>
-            <p class="location"></p>
-            <div class="buttonBox">
-              <button type="button" class="seeDetail">MORE</button>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="shops-item">
-        <a class="shop-link" href="#">
-          <div class="shop-image">
-            <img src="#" alt="" />
-          </div>
-          <div class="shop-body">
-            <p class="name">チャオプラヤモール</p>
-            <p class="location"></p>
-            <div class="buttonBox">
-              <button type="button" class="seeDetail">MORE</button>
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="shops-item">
-        <a class="shop-link" href="#">
-          <div class="shop-image">
-            <img src="#" alt="" />
-          </div>
-          <div class="shop-body">
-            <p class="name">トラファルガーモール</p>
-            <p class="location"></p>
-            <div class="buttonBox">
-              <button type="button" class="seeDetail">MORE</button>
-            </div>
-          </div>
-        </a>
-      </li>
+      <?php
+      $shop_pages = get_child_pages();
+      if ($shop_pages->have_posts()) :
+        while ($shop_pages->have_posts()) : $shop_pages->the_post();
+      ?>
+          <li class="shops-item">
+            <a class="shop-link" href="<?php the_permalink(); ?>">
+              <div class="shop-image"><?php the_post_thumbnail('common'); ?></div>
+              <div class="shop-body">
+                <p class="name"><?php the_title(); ?></p>
+                <p class="location"></p>
+                <div class="buttonBox">
+                  <button type="button" class="seeDetail">MORE</button>
+                </div>
+              </div>
+            </a>
+          </li>
+      <?php
+        endwhile;
+        wp_reset_postdata();
+      endif;
+      ?>
     </ul>
     <div class="section-buttons">
       <button type="button" class="button button-ghost" onclick="javascript:location.href = '#';">
